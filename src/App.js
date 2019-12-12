@@ -11,8 +11,8 @@ class App extends PureComponent {
     isFlipped: Array(16).fill(false),
     shuffledCard: App.duplicateCard().sort(() => Math.random() - 0.5),
     clickCount: 1,
-    prevSelectedCard: -1,
-    prevCardId: -1
+    prevSelectedCard: 'Matched',
+    prevCardId: 'Matched'
   };
 
   static duplicateCard = () => {
@@ -51,8 +51,8 @@ class App extends PureComponent {
   isCardMatch = (card1, card2, card1Id, card2Id) => {
     if (card1 === card2) {
       const hideCard = this.state.shuffledCard.slice();
-      hideCard[card1Id] = -1;
-      hideCard[card2Id] = -1;
+      hideCard[card1Id] = 'Matched';
+      hideCard[card2Id] = 'Matched';
       setTimeout(() => {
         this.setState(prevState => ({
           shuffledCard: hideCard
@@ -73,8 +73,8 @@ class App extends PureComponent {
       isFlipped: Array(16).fill(false),
       shuffledCard: App.duplicateCard().sort(() => Math.random() - 0.5),
       clickCount: 1,
-      prevSelectedCard: -1,
-      prevCardId: -1
+      prevSelectedCard: 'Matched!',
+      prevCardId: 'Matched'
     });
   };
 

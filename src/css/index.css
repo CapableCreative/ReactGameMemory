@@ -5,6 +5,7 @@ body {
 }
 h1 {
   font-family: 'Happy Monkey', sans-serif;
+  color: #FFF;
   text-align: center;
   width: 100%;
   display: block;
@@ -91,7 +92,7 @@ button.card-front {
 .card-back {
     font-weight: bold;
     text-align: center;
-    font-size: 80px;
+    font-size: 40px;
     justify-content: center;
     align-items: center;
 }

@@ -1,12 +1,15 @@
+// PureComponent prevents unecessary rerendering when state is unchanged or equal to initial (as I understand it) - SLF
 import React, { PureComponent } from 'react';
+// Importing the three components available to this page - SLF
 import Header from './components/Header';
 import Card from './components/Card';
 import GameOver from './components/GameOver';
 
+// I should have made CSS based on component (modular), but I haven't gotten there yet. ** is my note to myself for improvements. - SLF
 import './css/index.css';
 
 class App extends PureComponent {
-
+// We set the various states for the card / board. Is it flipped? Does it match the previous selection? First or second click? Any remaing matches, or do we need to shuffle the cards? - SLF
   state = { 
     isFlipped: Array(16).fill(false),
     shuffledCard: App.duplicateCard().sort(() => Math.random() - 0.5),
@@ -15,12 +18,13 @@ class App extends PureComponent {
     prevCardId: 'Matched'
   };
 
+// Static was placed in my reference code. I wasn't sure what it was, so I read this: https://medium.com/front-end-weekly/understanding-static-in-javascript-10782149993 - SLF
   static duplicateCard = () => {
     return [0,1,2,3,4,5,6,7].reduce((preValue, current, index, array) => {
       return preValue.concat([current, current])
     },[]);
   };
-
+// When cards (buttons) are clicked, we prevent default button results and instead flip the card (using the flip card node package)
   handleClick = event => {
     event.preventDefault();
     const cardId = event.target.id;

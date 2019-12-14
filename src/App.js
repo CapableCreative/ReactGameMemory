@@ -26,32 +26,34 @@ class App extends PureComponent {
   };
 // When cards (buttons) are clicked, we prevent default button results and instead flip the card (using the flip card node package)
   handleClick = event => {
+    // Prevent default page refresh based on button click
     event.preventDefault();
+    // What item is being 'handled'
     const cardId = event.target.id;
+    // This card has been flipped
     const newFlipps = this.state.isFlipped.slice();
     this.setState({
         prevSelectedCard: this.state.shuffledCard[cardId],
         prevCardId: cardId
     });
-
+    // Behaviors based on first or second click ...
     if (newFlipps[cardId] === false) {
       newFlipps[cardId] = !newFlipps[cardId];
       this.setState(prevState => ({ 
         isFlipped: newFlipps,
         clickCount: this.state.clickCount + 1
       }));
-
       if (this.state.clickCount === 2) {
         this.setState({ clickCount: 1 });
         const prevCardId = this.state.prevCardId;
         const newCard = this.state.shuffledCard[cardId];
         const previousCard = this.state.prevSelectedCard;
-
+        // If second card matches first, run isCardMatch function with the previousCard newCard and their id props
         this.isCardMatch(previousCard, newCard, prevCardId, cardId);
       }
     }
   };
-
+  // If the cards match, set id to "Matched" and do not unflip
   isCardMatch = (card1, card2, card1Id, card2Id) => {
     if (card1 === card2) {
       const hideCard = this.state.shuffledCard.slice();
@@ -71,7 +73,7 @@ class App extends PureComponent {
       }, 1000);
     }
   };
-
+  // Once all cards are matched, hide all and prompt to display GameOver.jsx
   restartGame = () => {
     this.setState({
       isFlipped: Array(16).fill(false),
@@ -81,7 +83,7 @@ class App extends PureComponent {
       prevCardId: 'Matched'
     });
   };
-
+  // Is every card isFlipped? 
   isGameOver = () => {
     return this.state.isFlipped.every((element, index, array) => element !== false);
   };

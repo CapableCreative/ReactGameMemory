@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Static Header component file
 const Header = ({ restartGame }) => (
   <div className="grid-header-container">
     <h1>The Fantastic <span>Clicky-Match Game</span></h1>
